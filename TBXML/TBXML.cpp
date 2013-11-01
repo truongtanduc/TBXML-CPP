@@ -82,7 +82,7 @@ TBXML::TBXML() {
 	bytesLength = 0;
 }
 
-bool TBXML::initWithXMLString(std::string aXMLString, std::string error) {
+bool TBXML::initWithXMLString(std::string &aXMLString, std::string &error) {
 	// allocate memory for byte array
 	strcpy(bytes, aXMLString.c_str());
 
@@ -98,7 +98,7 @@ bool TBXML::initWithXMLString(std::string aXMLString, std::string error) {
 	return true;
 }
 
-bool TBXML::initWithXMLFile(std::string aXMLFile, std::string error) {
+bool TBXML::initWithXMLFile(std::string &aXMLFile, std::string &error) {
 	ifstream file (aXMLFile.c_str(), ios::in|ios::binary|ios::ate);
 	if (file.is_open())
 	{
@@ -120,7 +120,7 @@ bool TBXML::initWithXMLFile(std::string aXMLFile, std::string error) {
 	}
 }
 
-int TBXML::allocateBytesOfLength(long length, std::string error) {
+int TBXML::allocateBytesOfLength(long length, std::string &error) {
     bytesLength = length;
 
     int rev = D_TBXML_SUCCESS;
@@ -141,7 +141,7 @@ int TBXML::allocateBytesOfLength(long length, std::string error) {
     return rev;
 }
 
-char* TBXML::mallocateBytesOfLength(long length, std::string error) {
+char* TBXML::mallocateBytesOfLength(long length, std::string &error) {
 	if (this->allocateBytesOfLength(length, error) == D_TBXML_SUCCESS) {
 		return bytes;
 	}
@@ -154,7 +154,7 @@ std::string TBXML::elementName(TBXMLElement* aXMLElement) {
 	return rev;
 }
 
-std::string TBXML::elementName(TBXMLElement* aXMLElement, std::string error) {
+std::string TBXML::elementName(TBXMLElement* aXMLElement, std::string &error) {
     // check for nil element
     if (NULL == aXMLElement) {
     	error.clear();
@@ -179,7 +179,7 @@ std::string TBXML::attributeName(TBXMLAttribute* aXMLAttribute) {
 	return rev;
 }
 
-std::string TBXML::attributeName(TBXMLAttribute* aXMLAttribute, std::string error) {
+std::string TBXML::attributeName(TBXMLAttribute* aXMLAttribute, std::string &error) {
     // check for nil attribute
     if (NULL == aXMLAttribute) {
     	error.clear();
@@ -205,7 +205,7 @@ std::string TBXML::attributeValue(TBXMLAttribute* aXMLAttribute) {
 	return rev;
 }
 
-std::string TBXML::attributeValue(TBXMLAttribute* aXMLAttribute, std::string error) {
+std::string TBXML::attributeValue(TBXMLAttribute* aXMLAttribute, std::string &error) {
     // check for nil attribute
     if (NULL == aXMLAttribute) {
     	error.clear();
@@ -224,7 +224,7 @@ std::string TBXML::textForElement(TBXMLElement* aXMLElement) {
 	return rev;
 }
 
-std::string TBXML::textForElement(TBXMLElement* aXMLElement, std::string error) {
+std::string TBXML::textForElement(TBXMLElement* aXMLElement, std::string &error) {
     // check for nil element
     if (NULL == aXMLElement) {
     	error.clear();
@@ -243,7 +243,7 @@ std::string TBXML::textForElement(TBXMLElement* aXMLElement, std::string error) 
 	return rev;
 }
 
-std::string TBXML::valueOfAttributeNamed(std::string aName, TBXMLElement* aXMLElement) {
+std::string TBXML::valueOfAttributeNamed(std::string &aName, TBXMLElement* aXMLElement) {
 	const char* name = aName.c_str();
 	char* value;
 	TBXMLAttribute * attribute = aXMLElement->firstAttribute;
@@ -259,7 +259,7 @@ std::string TBXML::valueOfAttributeNamed(std::string aName, TBXMLElement* aXMLEl
 	return rev;
 }
 
-std::string TBXML::valueOfAttributeNamed(std::string aName, TBXMLElement* aXMLElement, std::string error) {
+std::string TBXML::valueOfAttributeNamed(std::string &aName, TBXMLElement* aXMLElement, std::string &error) {
     // check for nil element
     if (NULL == aXMLElement) {
     	error.clear();
@@ -301,7 +301,7 @@ std::string TBXML::valueOfAttributeNamed(std::string aName, TBXMLElement* aXMLEl
 	return rev;
 }
 
-TBXMLElement* TBXML::childElementNamed(std::string aName, TBXMLElement* aParentXMLElement) {
+TBXMLElement* TBXML::childElementNamed(std::string &aName, TBXMLElement* aParentXMLElement) {
 	TBXMLElement * xmlElement = aParentXMLElement->firstChild;
 	const char * name = aName.c_str();
 	while (xmlElement) {
@@ -313,7 +313,7 @@ TBXMLElement* TBXML::childElementNamed(std::string aName, TBXMLElement* aParentX
 	return NULL;
 }
 
-TBXMLElement* TBXML::childElementNamed(std::string aName, TBXMLElement* aParentXMLElement, std::string error) {
+TBXMLElement* TBXML::childElementNamed(std::string &aName, TBXMLElement* aParentXMLElement, std::string &error) {
     // check for nil element
     if (NULL == aParentXMLElement) {
     	error.clear();
@@ -342,7 +342,7 @@ TBXMLElement* TBXML::childElementNamed(std::string aName, TBXMLElement* aParentX
     return NULL;
 }
 
-TBXMLElement* TBXML::nextSiblingNamed(std::string aName, TBXMLElement* aXMLElement) {
+TBXMLElement* TBXML::nextSiblingNamed(std::string &aName, TBXMLElement* aXMLElement) {
 	TBXMLElement * xmlElement = aXMLElement->nextSibling;
 	const char * name = aName.c_str();
 	while (xmlElement) {
@@ -354,7 +354,7 @@ TBXMLElement* TBXML::nextSiblingNamed(std::string aName, TBXMLElement* aXMLEleme
 	return NULL;
 }
 
-TBXMLElement* TBXML::nextSiblingNamed(std::string aName, TBXMLElement* aXMLElement, std::string error) {
+TBXMLElement* TBXML::nextSiblingNamed(std::string &aName, TBXMLElement* aXMLElement, std::string &error) {
     // check for nil element
     if (NULL == aXMLElement) {
     	error.clear();

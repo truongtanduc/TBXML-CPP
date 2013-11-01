@@ -127,25 +127,25 @@ public:
 
 	TBXMLElement * rootXMLElement;
 
-	bool initWithXMLString(std::string aXMLString, std::string error);
-	bool initWithXMLFile(std::string aXMLFile, std::string error);
+	bool initWithXMLString(std::string &aXMLString, std::string &error);
+	bool initWithXMLFile(std::string &aXMLFile, std::string &error);
 
 	static std::string elementName(TBXMLElement* aXMLElement);
-	static std::string elementName(TBXMLElement* aXMLElement, std::string error);
+	static std::string elementName(TBXMLElement* aXMLElement, std::string &error);
 	static std::string textForElement(TBXMLElement* aXMLElement);
-	static std::string textForElement(TBXMLElement* aXMLElement, std::string error);
-	static std::string valueOfAttributeNamed(std::string aName, TBXMLElement* forElement);
-	static std::string valueOfAttributeNamed(std::string aName, TBXMLElement* forElement, std::string error);
+	static std::string textForElement(TBXMLElement* aXMLElement, std::string &error);
+	static std::string valueOfAttributeNamed(std::string &aName, TBXMLElement* forElement);
+	static std::string valueOfAttributeNamed(std::string &aName, TBXMLElement* forElement, std::string &error);
 
 	static std::string attributeName(TBXMLAttribute* aXMLAttribute);
-	static std::string attributeName(TBXMLAttribute* aXMLAttribute, std::string error);
+	static std::string attributeName(TBXMLAttribute* aXMLAttribute, std::string &error);
 	static std::string attributeValue(TBXMLAttribute* aXMLAttribute);
-	static std::string attributeValue(TBXMLAttribute* aXMLAttribute, std::string error);
+	static std::string attributeValue(TBXMLAttribute* aXMLAttribute, std::string &error);
 
-	static TBXMLElement* childElementNamed(std::string aName, TBXMLElement* parentElement);
-	static TBXMLElement* childElementNamed(std::string aName, TBXMLElement* parentElement, std::string error);
-	static TBXMLElement* nextSiblingNamed(std::string aName, TBXMLElement* searchFromElement);
-	static TBXMLElement* nextSiblingNamed(std::string aName, TBXMLElement* searchFromElement, std::string error);
+	static TBXMLElement* childElementNamed(std::string &aName, TBXMLElement* parentElement);
+	static TBXMLElement* childElementNamed(std::string &aName, TBXMLElement* parentElement, std::string &error);
+	static TBXMLElement* nextSiblingNamed(std::string &aName, TBXMLElement* searchFromElement);
+	static TBXMLElement* nextSiblingNamed(std::string &aName, TBXMLElement* searchFromElement, std::string &error);
 
 private:
 	
@@ -160,8 +160,8 @@ private:
 
 	static std::string errorWithCode(int code);
 	void decodeBytes();
-	int allocateBytesOfLength(long length, std::string error);
-	char* mallocateBytesOfLength(long length, std::string error);
+	int allocateBytesOfLength(long length, std::string &error);
+	char* mallocateBytesOfLength(long length, std::string &error);
 	TBXMLElement* nextAvailableElement();
 	TBXMLAttribute* nextAvailableAttribute();
 };
